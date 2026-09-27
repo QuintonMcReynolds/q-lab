@@ -3,7 +3,7 @@ import math
 import pandas as pd
 import pytest
 
-from proplab import model, odds
+from qlab import model, odds
 
 
 def make_log(values, season=2026):

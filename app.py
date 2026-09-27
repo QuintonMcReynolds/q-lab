@@ -1,4 +1,4 @@
-"""PropLab: NFL player prop research tool (hit rates, matchup grades, projections)."""
+"""Q Lab: NFL player prop research tool (hit rates, matchup grades, projections)."""
 from __future__ import annotations
 
 import os
@@ -8,9 +8,9 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from proplab import data, model, odds
+from qlab import data, model, odds
 
-st.set_page_config(page_title="PropLab · NFL Props", page_icon="🏈", layout="wide")
+st.set_page_config(page_title="Q Lab · NFL Props", page_icon="🏈", layout="wide")
 
 GREEN, RED, MUTED = "#22c55e", "#ef4444", "#71717a"
 
@@ -116,7 +116,7 @@ def add_to_slip(player, stat, side, line, price, p_side):
 # ------------------------------------------------------------------ header
 left, right = st.columns([3, 2])
 with left:
-    st.markdown("## 🏈 PropLab")
+    st.markdown("## 🏈 Q Lab")
     st.caption("Hit rates · matchup grades · model projections for NFL player props")
 with right:
     latest = df[df["season"] == SEASON]["week"].max()
@@ -197,7 +197,7 @@ with tab_an:
                       delta_color="off")
             m3.metric("EV Over", f"{ev_o:+.1%}" if ev_o is not None else "–")
             m4.metric("EV Under", f"{ev_u:+.1%}" if ev_u is not None else "–")
-            st.markdown(f'<div class="pl-card"><span class="pl-small">PropLab verdict</span><br>'
+            st.markdown(f'<div class="pl-card"><span class="pl-small">Q Lab verdict</span><br>'
                         f'<span class="pl-verdict pl-{tone}">{label}</span>'
                         f'<div class="pl-small" style="margin-top:4px">Base {proj.base:.1f} × matchup '
                         f'{proj.matchup_factor:.2f} · σ {proj.sd:.1f} · {proj.games_used} games</div></div>',
@@ -427,7 +427,7 @@ with tab_slip:
         c4.metric("Parlay EV", f"{p_all * dec - 1:+.1%}")
         st.caption("Parlay math assumes legs are independent. Same-game legs are usually correlated.")
         b1, b2 = st.columns(2)
-        b1.download_button("⬇️ Export slip (CSV)", sdf.to_csv(index=False), "proplab_slip.csv",
+        b1.download_button("⬇️ Export slip (CSV)", sdf.to_csv(index=False), "qlab_slip.csv",
                            width="stretch")
         if b2.button("🗑️ Clear slip", width="stretch"):
             st.session_state.slip = []

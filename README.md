@@ -1,6 +1,6 @@
-# 🏈 PropLab: NFL Player Prop Research Tool
+# 🏈 Q Lab: NFL Player Prop Research Tool
 
-PropLab is a free, open-source NFL player-prop analyzer inspired by tools like Prop Season. It combines **historical hit rates**, **defense-vs-position matchup grades**, and a **recency-weighted projection model** to estimate the probability that a prop goes over or under, then compares that to sportsbook odds to find expected value (EV).
+Q Lab is a free, open-source NFL player-prop analyzer inspired by tools like Prop Season. It combines **historical hit rates**, **defense-vs-position matchup grades**, and a **recency-weighted projection model** to estimate the probability that a prop goes over or under, then compares that to sportsbook odds to find expected value (EV).
 
 Built with Python, pandas, Streamlit, and Plotly. Data comes from [nflverse](https://github.com/nflverse) (free, updated nightly).
 
@@ -26,8 +26,8 @@ Built with Python, pandas, Streamlit, and Plotly. Data comes from [nflverse](htt
 ## Run it locally
 
 ```bash
-git clone https://github.com/QuintonMcReynolds/prop-lab.git
-cd prop-lab
+git clone https://github.com/QuintonMcReynolds/q-lab.git
+cd q-lab
 python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 streamlit run app.py
@@ -51,12 +51,12 @@ pip install pytest && pytest -q
 
 ```
 app.py               Streamlit UI
-proplab/data.py      nflverse loading, schedule & Vegas context
-proplab/model.py     projections, hit rates, matchup grades, odds math
-proplab/odds.py      The Odds API client (optional)
+qlab/data.py      nflverse loading, schedule & Vegas context
+qlab/model.py     projections, hit rates, matchup grades, odds math
+qlab/odds.py      The Odds API client (optional)
 tests/               unit tests for the model and odds math
 ```
 
 ## Disclaimer
 
-PropLab is for research and entertainment. No model can guarantee results, and sportsbooks price in information (injuries, role changes, weather) that this model doesn't see. Only bet what you can afford to lose. If gambling stops being fun, call 1-800-GAMBLER.
+Q Lab is for research and entertainment. No model can guarantee results, and sportsbooks price in information (injuries, role changes, weather) that this model doesn't see. Only bet what you can afford to lose. If gambling stops being fun, call 1-800-GAMBLER.
