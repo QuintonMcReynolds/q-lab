@@ -2,8 +2,10 @@
 from __future__ import annotations
 
 from datetime import date
+from io import BytesIO
 
 import pandas as pd
+import requests
 
 STATS_URL = (
     "https://github.com/nflverse/nflverse-data/releases/download/"
@@ -22,8 +24,15 @@ KEEP_COLS = [
 ]
 
 
+def _fetch(url: str) -> BytesIO:
+    """Download via requests, which ships its own CA bundle (avoids macOS python.org SSL errors)."""
+    resp = requests.get(url, timeout=60)
+    resp.raise_for_status()
+    return BytesIO(resp.content)
+
+
 def load_games() -> pd.DataFrame:
-    games = pd.read_csv(GAMES_URL)
+    games = pd.read_csv(_fetch(GAMES_URL))
     games["gameday"] = pd.to_datetime(games["gameday"])
     return games
 
@@ -40,7 +49,7 @@ def load_player_weeks(seasons: list[int]) -> pd.DataFrame:
     frames = []
     for season in seasons:
         try:
-            df = pd.read_parquet(STATS_URL.format(season=season))
+            df = pd.read_parquet(_fetch(STATS_URL.format(season=season)))
         except Exception:  # season file not published yet
             continue
         frames.append(df[[c for c in KEEP_COLS if c in df.columns]])
